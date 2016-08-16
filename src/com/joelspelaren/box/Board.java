@@ -64,7 +64,6 @@ public class Board extends JPanel implements ActionListener {
 	private class TAdapter extends KeyAdapter {
 
 		public boolean right;
-        private Bullet bullet;
 
 		public void keyReleased(KeyEvent e) {
 
@@ -86,27 +85,23 @@ public class Board extends JPanel implements ActionListener {
 				boxMan.moveLeft();
 				gun = false;
 
-			}
-
-
-			if (key == KeyEvent.VK_SPACE){
+			} else if (key == KeyEvent.VK_SPACE){
 
 				if(gun == false){
-				gun = true;
-				if(right == false){
-					boxMan.imageIndex = 31;
-				}else if(right == true){
-					boxMan.imageIndex = 36;
-				}
+					gun = true;
+					if(right == false){
+						boxMan.imageIndex = 31;
+					}else if(right == true){
+						boxMan.imageIndex = 36;
+					}
 				}else{
-                                    bullet.initBullet();
-					moveBullets();
+					bullets.add(new Bullet(boxMan.getX(), boxMan.getY()));
 				}
-				
-//				if(shoot){
-//					bullets.add(new Bullet(x,y,riktning,visible));
-//				}
-			}			if (key == KeyEvent.VK_UP){
+
+				//				if(shoot){
+				//					bullets.add(new Bullet(x,y,riktning,visible));
+				//				}
+			} else if (key == KeyEvent.VK_UP){
 
 				boxMan.jump();
 			}
