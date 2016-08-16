@@ -19,7 +19,7 @@ import com.joelspelaren.box.sprites.Bullet;
 public class Board extends JPanel implements ActionListener {
 
 	private BoxMan boxMan;
-	private int gunSel = 0;
+	private int wepSel = 0;
 	private List<Bullet> bullets;
 	private Timer timer;
 	public boolean gun = false;
@@ -44,9 +44,10 @@ public class Board extends JPanel implements ActionListener {
 		g.setColor(Color.LIGHT_GRAY);
 		//g.drawLine(0, 200, 400, 200);
 		//g.drawRect(0, 200, 400, 10);
-		g.fillRect(0, 200, 400, 100);
+		g.fillRect(0, 180, 400, 160);
 		g.setColor(Color.GRAY);
-		g.fillRect(20, 200, 70, -150);
+		g.fillRect(20, 180, 70, -150);
+                g.fillRect(100, 180, 80, -100);
 		g.drawImage(boxMan.getImage(), boxMan.getX(), boxMan.getY(), this);
 		paintBullets(g);
 	}
@@ -63,6 +64,7 @@ public class Board extends JPanel implements ActionListener {
 	private class TAdapter extends KeyAdapter {
 
 		public boolean right;
+        private Bullet bullet;
 
 		public void keyReleased(KeyEvent e) {
 
@@ -97,12 +99,16 @@ public class Board extends JPanel implements ActionListener {
 					boxMan.imageIndex = 36;
 				}
 				}else{
+                                    bullet.initBullet();
 					moveBullets();
 				}
 				
 //				if(shoot){
 //					bullets.add(new Bullet(x,y,riktning,visible));
 //				}
+			}			if (key == KeyEvent.VK_UP){
+
+				boxMan.jump();
 			}
 
 		}

@@ -59,14 +59,20 @@ public class BoxMan extends Sprite {
 		if(y > 160){
 			YVel = YVel * 1;
 			y = y + YVel;
-			YVel = 0;
+                        YVel = 1;
+			YVel = YVel * -1;
 		}else{
 			YVel = YVel + gravity;
 			y = y + YVel;
 		}
 	}
 
-	public void moveRight(){
+    public void jump() {
+        YVel = YVel - 10;
+        y = y + YVel;
+    }
+
+    public void moveRight() {
 		x = x + 2;
 		right = true;
 		if(imageIndex < 10){
