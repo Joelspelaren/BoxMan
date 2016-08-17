@@ -6,6 +6,8 @@ public class BoxMan extends Sprite {
 	private int YVel;
 	public int gravity = 1;
 	private boolean right;
+	private int xDirection;
+	private int yDirection;
 
 	public BoxMan(int x, int y) {
 		super(x, y);
@@ -73,6 +75,7 @@ public class BoxMan extends Sprite {
     }
 
     public void moveRight() {
+    	xDirection = 3;
 		x = x + 2;
 		right = true;
 		if(imageIndex < 10){
@@ -83,6 +86,8 @@ public class BoxMan extends Sprite {
 	}
 
 	public void moveLeft() {
+
+    	xDirection = -3;
 		x = x - 2;
 		right = false;
 		if(imageIndex < 20){
@@ -97,6 +102,18 @@ public class BoxMan extends Sprite {
 
 		imageIndex = 31;
 		
+	}
+	
+	public Bullet shot() {
+		int xDirection;
+		if(this.xDirection > 0){
+			xDirection = 7;
+		} else {
+			xDirection = - 7;
+		}
+		Bullet bullet = new Bullet(getX(), getY(), xDirection, 0);
+		bullet.initBullet();
+		return bullet;
 	}
 
 }

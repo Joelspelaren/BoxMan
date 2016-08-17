@@ -95,9 +95,7 @@ public class Board extends JPanel implements ActionListener {
 						boxMan.imageIndex = 36;
 					}
 				}else{
-					Bullet bullet = new Bullet(boxMan.getX(), boxMan.getY());
-					bullet.initBullet();
-					bullets.add(bullet);
+					bullets.add(boxMan.shot());
 				}
 
 				//				if(shoot){
