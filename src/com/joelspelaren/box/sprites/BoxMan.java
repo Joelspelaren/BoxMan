@@ -53,6 +53,7 @@ public class BoxMan extends Sprite {
 		loadImage("resources/gunning walk2.png");
 		loadImage("resources/gunning walk3.png");
 		loadImage("resources/gunning walk4.png");
+		loadImage("resources/gunning walk5.png");
 		loadImage("resources/gunning right.png");
 
 		getImageDimensions();
@@ -95,7 +96,7 @@ public class BoxMan extends Sprite {
     	right = false;
     	xDirection = -2;
     	if(gun == 0){
-    		if(imageIndex < 20){
+    		if(imageIndex < 19){
     			imageIndex++;
     		}else{
     			imageIndex = 10;
@@ -115,7 +116,11 @@ public class BoxMan extends Sprite {
 	public void gun() {
 		if(gun == 0){
 			gun = 1;
-			imageIndex = 31;
+                        if(right){
+                            imageIndex = 31;
+                        } else {
+                            imageIndex = 32;
+                        }
 		} else {
 			gun = 0;
 			imageIndex = 0;
