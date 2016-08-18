@@ -104,7 +104,7 @@ public class BoxMan extends Sprite {
     	} else if(gun == 1) {
     		if(imageIndex < 31){
     			imageIndex = 31;
-    		} else if(imageIndex < 33){
+    		} else if(imageIndex < 34){
     			imageIndex++;
     		}else{
     			imageIndex = 31;
