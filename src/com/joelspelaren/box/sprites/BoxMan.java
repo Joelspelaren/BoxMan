@@ -8,10 +8,12 @@ public class BoxMan extends Sprite {
 	private boolean right;
 	private int xDirection;
 	private int yDirection;
+	private int gun;
 
 	public BoxMan(int x, int y) {
 		super(x, y);
 		initBoxMan();
+		gun = 0;
 	}
 
 	private void initBoxMan() {
@@ -61,7 +63,7 @@ public class BoxMan extends Sprite {
 		if(y > 160){
 			YVel = YVel * 1;
 			y = y + YVel;
-                        YVel = 1;
+			YVel = 1;
 			YVel = YVel * -1;
 		}else{
 			YVel = YVel + gravity;
@@ -73,11 +75,15 @@ public class BoxMan extends Sprite {
         YVel = YVel - 10;
         y = y + YVel;
     }
+    
+    public void moveRelease(){
+    	xDirection = 0;
+    	yDirection = 0;
+    }
 
     public void moveRight() {
-    	xDirection = 3;
-		x = x + 2;
-		right = true;
+    	right = true;
+    	xDirection = 2;
 		if(imageIndex < 10){
 			imageIndex++;
 		}else{
@@ -85,35 +91,63 @@ public class BoxMan extends Sprite {
 		}
 	}
 
-	public void moveLeft() {
+    public void moveLeft() {
+    	right = false;
+    	xDirection = -2;
+    	if(gun == 0){
+    		if(imageIndex < 20){
+    			imageIndex++;
+    		}else{
+    			imageIndex = 10;
+    		}
+    	} else if(gun == 1) {
+    		if(imageIndex < 31){
+    			imageIndex = 31;
+    		} else if(imageIndex < 33){
+    			imageIndex++;
+    		}else{
+    			imageIndex = 31;
+    		}
+    	}
 
-    	xDirection = -3;
-		x = x - 2;
-		right = false;
-		if(imageIndex < 19){
-			imageIndex++;
-		}else{
-			imageIndex = 10;
-		}
-		
-	}
+    }
 	
 	public void gun() {
-
-		imageIndex = 31;
+		if(gun == 0){
+			gun = 1;
+			imageIndex = 31;
+		} else {
+			gun = 0;
+			imageIndex = 0;
+		}
 		
 	}
 	
 	public Bullet shot() {
-		int xDirection;
-		if(this.xDirection > 0){
-			xDirection = 7;
-		} else {
-			xDirection = - 7;
+		Bullet bullet = null;
+		if(gun != 0){
+			int xDirection;
+//			if(this.xDirection > 0){
+//				xDirection = 7;
+//			} else {
+//				xDirection = - 7;
+//			}
+			if(right){
+				xDirection = 7;
+			} else {
+				xDirection = - 7;
+			}
+			bullet = new Bullet(getX(), getY(), xDirection, 0);
+			bullet.initBullet();
 		}
-		Bullet bullet = new Bullet(getX(), getY(), xDirection, 0);
-		bullet.initBullet();
 		return bullet;
+	}
+
+	public void move() {
+		this.x += xDirection;
+		this.y += yDirection;
+		physiks();
+		
 	}
 
 }
