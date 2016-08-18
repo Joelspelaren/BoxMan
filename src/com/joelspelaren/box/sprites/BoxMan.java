@@ -90,7 +90,7 @@ public class BoxMan extends Sprite {
     	xDirection = -3;
 		x = x - 2;
 		right = false;
-		if(imageIndex < 20){
+		if(imageIndex < 19){
 			imageIndex++;
 		}else{
 			imageIndex = 10;
