@@ -69,6 +69,15 @@ public class Board extends JPanel implements ActionListener {
 
 			//System.out.println("Tangent släppt");
 			//	            player.keyReleased(e);
+			int key = e.getKeyCode();
+
+			if (key == KeyEvent.VK_RIGHT){
+				boxMan.moveRelease();
+			} else if (key == KeyEvent.VK_LEFT){
+				boxMan.moveRelease();
+			} else if (key == KeyEvent.VK_UP){
+				boxMan.moveRelease();
+			}
 		}
 
 		public void keyPressed(KeyEvent e) {
@@ -76,34 +85,23 @@ public class Board extends JPanel implements ActionListener {
 			int key = e.getKeyCode();
 
 			if (key == KeyEvent.VK_RIGHT){
-				right = true;
 				boxMan.moveRight();
-				gun = false;
 
 			} else if (key == KeyEvent.VK_LEFT){
-				right = false;
 				boxMan.moveLeft();
-				gun = false;
 
 			} else if (key == KeyEvent.VK_SPACE){
-
-				if(gun == false){
-					gun = true;
-					if(right == false){
-						boxMan.imageIndex = 31;
-					}else if(right == true){
-						boxMan.imageIndex = 36;
-					}
-				}else{
-					bullets.add(boxMan.shot());
+				Bullet bullet = boxMan.shot();
+				if(bullet != null){
+					bullets.add(bullet);
 				}
 
-				//				if(shoot){
-				//					bullets.add(new Bullet(x,y,riktning,visible));
-				//				}
 			} else if (key == KeyEvent.VK_UP){
-
 				boxMan.jump();
+				
+			} else if (key == KeyEvent.VK_G){
+				boxMan.gun();
+				
 			}
 
 		}
@@ -111,9 +109,13 @@ public class Board extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boxMan.physiks();
+		moveBoxMan();
 		moveBullets();
 		repaint();
+	}
+
+	private void moveBoxMan() {
+		boxMan.move();
 	}
 
 	private void moveBullets() {
